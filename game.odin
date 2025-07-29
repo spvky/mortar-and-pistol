@@ -3,9 +3,13 @@ package main
 import rl "vendor:raylib"
 
 model: rl.Model
+input_buffer: InputBuffer
 
 
 init :: proc() {
+	when ODIN_OS == .Darwin {
+		rl.SetConfigFlags({.WINDOW_HIGHDPI})
+	}
 	rl.InitWindow(1600, 900, "name")
 	screen_texture = rl.LoadRenderTexture(800, 450)
 	world = make_world()
