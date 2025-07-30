@@ -21,7 +21,8 @@ write_entire_file :: proc(name: string, data: []byte, truncate := true) -> (succ
 }
 
 // A way to load textures that works on desktop and web, only works for png files
-load_texture :: proc(filepath: string) -> (texture: rl.Texture, cond: bool) {
+load_texture :: proc(filepath: string) -> rl.Texture {
+	texture: rl.Texture
 	if texture_data, texture_ok := read_entire_file(filepath, context.temp_allocator); texture_ok {
 		texture_img := rl.LoadImageFromMemory(
 			".png",
@@ -29,8 +30,7 @@ load_texture :: proc(filepath: string) -> (texture: rl.Texture, cond: bool) {
 			c.int(len(texture_data)),
 		)
 		texture = rl.LoadTextureFromImage(texture_img)
-		cond = true
 		rl.UnloadImage(texture_img)
 	}
-	return
+	return texture
 }
