@@ -3,7 +3,7 @@ package main
 
 main :: proc() {
 	init()
-	for should_run() {
+	if should_run() {
 		update()
 	}
 	shutdown()

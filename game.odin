@@ -1,5 +1,6 @@
 package main
 
+import "core:c"
 import rl "vendor:raylib"
 
 model: rl.Model
@@ -10,6 +11,7 @@ run: bool
 
 
 init :: proc() {
+	run = true
 	when ODIN_OS == .Darwin {
 		rl.SetConfigFlags({.WINDOW_HIGHDPI})
 	}
@@ -36,4 +38,8 @@ should_run :: proc() -> bool {
 		run = !rl.WindowShouldClose()
 	}
 	return run
+}
+
+parent_window_size_changed :: proc(w, h: int) {
+	rl.SetWindowSize(c.int(w), c.int(h))
 }

@@ -3,7 +3,7 @@ package main
 Collider :: struct {
 	tag: EnvironmentTag,
 	translation: Vec3,
-	extents: Vec3
+	extents: Vec3,
 }
 
 EnvironmentTag :: enum {
@@ -11,5 +11,5 @@ EnvironmentTag :: enum {
 	Fence,
 	Ceiling,
 	Wall,
-	Gate
+	Gate,
 }
