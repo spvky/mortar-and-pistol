@@ -18,8 +18,8 @@ update_camera :: proc() {
 	frametime := rl.GetFrameTime()
 	camera := &world.camera
 	delta := rl.GetMouseDelta()
-	min: f32 = -90
-	max: f32 = 90
+	min: f32 = -89
+	max: f32 = 89
 	camera.yaw += (delta.x * camera.look_sensitivity * frametime)
 	camera.pitch = l.clamp(
 		camera.pitch - (delta.y * camera.look_sensitivity * frametime),
