@@ -7,9 +7,11 @@ import rl "vendor:raylib"
 
 Camera :: struct {
 	using raw:        rl.Camera3D,
+	look_sensitivity: f32,
 	pitch:            f32,
 	yaw:              f32,
-	look_sensitivity: f32,
+	forward:          Vec3,
+	right:            Vec3,
 }
 
 update_camera :: proc() {
@@ -24,9 +26,6 @@ update_camera :: proc() {
 		min,
 		max,
 	)
-	// pitch: f32 = l.to_radians(
-	// 	l.clamp(l.to_degrees(camera.pitch - (delta.y * 500 * frametime)), -60, 60),
-	// )
 
 	forward := l.normalize(
 		Vec3 {
@@ -38,25 +37,31 @@ update_camera :: proc() {
 	right := l.normalize(l.cross(forward, Vec3{0, 1, 0}))
 
 
-	movement_delta: Vec3
-
-	if rl.IsKeyDown(.W) {
-		movement_delta.z += 1
-	}
-	if rl.IsKeyDown(.S) {
-		movement_delta.z -= 1
-	}
-	if rl.IsKeyDown(.A) {
-		movement_delta.x -= 1
-	}
-	if rl.IsKeyDown(.D) {
-		movement_delta.x += 1
-	}
-
-	movement_delta = l.normalize0(movement_delta)
-
-	move_speed: f32 = frametime
-	world.camera.position += forward * move_speed * movement_delta.z
-	world.camera.position += right * move_speed * movement_delta.x
+	camera.forward = forward
+	camera.right = right
+	// world.camera.position += forward * move_speed * movement_delta.z
+	// world.camera.position += right * move_speed * movement_delta.x
 	world.camera.target = camera.position + forward
+}
+
+interpolate_vector :: proc(vector: Vec3) {
+	// if rl.IsKeyDown(.W) {
+	// 	movement_delta.z += 1
+	// }
+	// if rl.IsKeyDown(.S) {
+	// 	movement_delta.z -= 1
+	// }
+	// if rl.IsKeyDown(.A) {
+	// 	movement_delta.x -= 1
+	// }
+	// if rl.IsKeyDown(.D) {
+	// 	movement_delta.x += 1
+	// }
+
+	true_vec := (forward * vector.z) + (right * vector.x)
+	true_vec.y = 0
+	return l.normalize0(true_vec)
+
+	// move_speed: f32 = frametime
+	// camera.position += movement_vec * move_speed
 }

@@ -24,6 +24,7 @@ init :: proc() {
 		rl.SetConfigFlags({.WINDOW_HIGHDPI})
 	}
 	rl.InitWindow(1600, 900, "name")
+	rl.DisableCursor()
 	screen_texture = rl.LoadRenderTexture(800, 450)
 	world = make_world()
 	check := load_texture("assets/textures/checkerboard.png")
