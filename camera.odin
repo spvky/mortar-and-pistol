@@ -15,11 +15,15 @@ Camera :: struct {
 update_camera :: proc() {
 	frametime := rl.GetFrameTime()
 	camera := &world.camera
-	fmt.printfln("Yaw: %v", camera.yaw)
-	fmt.printfln("Pitch: %v", camera.pitch)
 	delta := rl.GetMouseDelta()
+	min: f32 = -90
+	max: f32 = 90
 	camera.yaw += (delta.x * camera.look_sensitivity * frametime)
-	camera.pitch -= (delta.y * camera.look_sensitivity * frametime)
+	camera.pitch = l.clamp(
+		camera.pitch - (delta.y * camera.look_sensitivity * frametime),
+		min,
+		max,
+	)
 	// pitch: f32 = l.to_radians(
 	// 	l.clamp(l.to_degrees(camera.pitch - (delta.y * 500 * frametime)), -60, 60),
 	// )
