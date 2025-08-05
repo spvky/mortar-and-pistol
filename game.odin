@@ -2,7 +2,6 @@ package main
 
 
 import "core:c"
-import "core:fmt"
 import "core:math"
 import rl "vendor:raylib"
 
@@ -40,7 +39,6 @@ update :: proc() {
 }
 
 time_step :: proc() {
-	frametime := rl.GetFrameTime()
 	if !time.started {
 		time.t = f32(rl.GetTime())
 		time.started = true

@@ -1,9 +1,9 @@
 package main
 
 Collider :: struct {
-	tag: EnvironmentTag,
+	tag:         EnvironmentTag,
 	translation: Vec3,
-	extents: Vec3,
+	extents:     Vec3,
 }
 
 EnvironmentTag :: enum {

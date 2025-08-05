@@ -1,6 +1,5 @@
 package main
 
-import rl "vendor:raylib"
 
 World :: struct {
 	camera: Camera,

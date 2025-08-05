@@ -1,6 +1,5 @@
 package main
 
-import "core:fmt"
 import m "core:math"
 import l "core:math/linalg"
 import rl "vendor:raylib"
